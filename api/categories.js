@@ -85,14 +85,14 @@ app.delete("/api/categories", async (req, res) => {
 
 
 // DELETE all categories entries (optional)
-app.delete('/api/categories', async (req, res) => {
-    try {
-        await categories.deleteMany({});
-        res.status(200).json({ message: 'All categoriess deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// app.delete('/api/categories', async (req, res) => {
+//     try {
+//         await categories.deleteMany({});
+//         res.status(200).json({ message: 'All categoriess deleted successfully' });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// });
 
 // Handle OPTIONS requests (CORS preflight)
 app.options('*', (req, res) => {
