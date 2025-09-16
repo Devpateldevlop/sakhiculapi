@@ -71,7 +71,7 @@ app.put('/api/categories/:id', async (req, res) => {
 // DELETE a categories entry by ID
 app.delete("/api/categories", async (req, res) => {
   try {
-    const category = await Category.findOneAndDelete({ catb: req.body.catid });
+    const category = await Category.findOneAndDelete({ catid: req.body.catid });
 
     if (!category) {
       return res.status(404).json({ message: "Category not found" });
