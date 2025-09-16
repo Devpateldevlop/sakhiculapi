@@ -69,15 +69,20 @@ app.put('/api/categories/:id', async (req, res) => {
 });
 
 // DELETE a categories entry by ID
-app.delete('/api/categories/:id', async (req, res) => {
-    try {
-        const deletedcategories = await categories.findByIdAndDelete(req.params.id);
-        if (!deletedcategories) return res.status(404).json({ message: 'categories not found' });
-        res.status(200).json({ message: 'categories deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+app.delete("/api/categories/:catid", async (req, res) => {
+  try {
+    const category = await Category.findOneAndDelete({ catid: req.params.catid });
+
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
     }
+
+    res.json({ message: "Category deleted successfully", category });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
+
 
 // DELETE all categories entries (optional)
 app.delete('/api/categories', async (req, res) => {
