@@ -14,7 +14,7 @@
      {
       "src": "/api/categories",
       "dest": "/api/categories.js"
-    }
+    },
      {
       "src": "/api/categories/:catid",
       "dest": "/api/categories.js"
