@@ -1,5 +1,5 @@
 const express = require('express');
-const categories = require('../model/categories'); // Adjust the path if necessary
+const Category = require('../model/categories'); // Adjust the path if necessary
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -25,19 +25,20 @@ mongoose.connect("mongodb+srv://dev:devpatel1234@cluster0.pf0qwiv.mongodb.net")
 // CREATE a new categories entry
 app.post('/api/categories', async (req, res) => {
     try {
-        const categories = new categories(req.body);
-        const savedcategories = await categories.save();
-        res.status(201).json(savedcategories);
+        const category = new Category(req.body);   // use model `Category`
+        const savedCategory = await category.save();
+        res.status(201).json(savedCategory);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 });
 
+
 // READ all categories entries
 app.get('/api/categories', async (req, res) => {
     try {
-        const categoriess = await categories.find();
-        res.status(200).json(categoriess);
+        const categories = await Category.find();
+        res.status(200).json(categories);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
