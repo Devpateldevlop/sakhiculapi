@@ -88,7 +88,7 @@ app.put('/api/product/:id', async (req, res) => {
 //     }
 // });
 
-app.delete("/api/products", async (req, res) => {
+app.delete("/api/product", async (req, res) => {
   try {
     const { _id } = req.body;   // extract _id from request body
 
