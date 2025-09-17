@@ -57,15 +57,29 @@ app.get('/api/product/:id', async (req, res) => {
 });
 
 // UPDATE a product entry by ID
-app.put('/api/product/:id', async (req, res) => {
-    try {
-        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updatedProduct) return res.status(404).json({ message: 'Product not found' });
-        res.status(200).json(updatedProduct);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+app.put("/api/products", async (req, res) => {
+  try {
+    const { _id, ...updateData } = req.body; // extract _id and keep rest
+
+    if (!_id) {
+      return res.status(400).json({ message: "Product _id is required" });
     }
+
+    const product = await Product.findByIdAndUpdate(_id, updateData, {
+      new: true,           // return updated product
+      runValidators: true  // apply schema validations
+    });
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.json({ message: "Product updated successfully", product });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
+
 
 // DELETE a product entry by ID
 // app.delete('/api/product/:id', async (req, res) => {
