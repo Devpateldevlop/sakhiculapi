@@ -57,7 +57,7 @@ app.get('/api/product/:id', async (req, res) => {
 });
 
 // UPDATE a product entry by ID
-app.put("/api/products", async (req, res) => {
+app.put("/api/product", async (req, res) => {
   try {
     const { _id, ...updateData } = req.body; // extract _id and keep rest
 
