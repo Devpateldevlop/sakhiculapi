@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/product",
+      "dest": "/api/products.js" 
+    },
+     {
+      "src": "/api/categories",
+      "dest": "/api/categories.js"
+    },
+     {
+      "src": "/api/categories/:catid",
+      "dest": "/api/categories.js"
+    }
+    ]
+}
