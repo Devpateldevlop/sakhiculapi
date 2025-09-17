@@ -4,6 +4,8 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 // Set up CORS
 app.use(cors({
     origin: '*', // Allow all domains or restrict to your frontend's domain
