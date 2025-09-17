@@ -68,25 +68,46 @@ app.put('/api/product/:id', async (req, res) => {
 });
 
 // DELETE a product entry by ID
-app.delete('/api/product/:id', async (req, res) => {
-    try {
-        const deletedProduct = await Product.findByIdAndDelete(req.params.id);
-        if (!deletedProduct) return res.status(404).json({ message: 'Product not found' });
-        res.status(200).json({ message: 'Product deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// app.delete('/api/product/:id', async (req, res) => {
+//     try {
+//         const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+//         if (!deletedProduct) return res.status(404).json({ message: 'Product not found' });
+//         res.status(200).json({ message: 'Product deleted successfully' });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// });
 
 // DELETE all product entries (optional)
-app.delete('/api/product', async (req, res) => {
-    try {
-        await Product.deleteMany({});
-        res.status(200).json({ message: 'All products deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+// app.delete('/api/product', async (req, res) => {
+//     try {
+//         await Product.deleteMany({});
+//         res.status(200).json({ message: 'All products deleted successfully' });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// });
+
+app.delete("/api/products", async (req, res) => {
+  try {
+    const { _id } = req.body;   // extract _id from request body
+
+    if (!_id) {
+      return res.status(400).json({ message: "Product _id is required" });
     }
+
+    const product = await Product.findByIdAndDelete(_id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.json({ message: "Product deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
+
 
 // Handle OPTIONS requests (CORS preflight)
 app.options('*', (req, res) => {
