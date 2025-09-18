@@ -36,13 +36,39 @@ app.post('/api/product', async (req, res) => {
 });
 
 // READ all product entries
+// app.get('/api/product', async (req, res) => {
+//     try {
+//         const products = await Product.find();
+//         res.status(200).json(products);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// });
+
+
+// GET /api/product?categoryname=Kurti
+// Or GET /api/product?categoryname=Kurti&size=M&color=Red
 app.get('/api/product', async (req, res) => {
-    try {
-        const products = await Product.find();
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+  try {
+    const filters = {};
+
+    // add filters dynamically if provided
+    if (req.query.categoryname) {
+      filters.categoryname = req.query.categoryname;
     }
+    if (req.query.size) {
+      filters.size = req.query.size;
+    }
+    if (req.query.color) {
+      filters.color = req.query.color;
+    }
+
+    const products = await Product.find(filters);
+    res.status(200).json(products);
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 // READ a single product entry by ID
