@@ -18,6 +18,14 @@
      {
       "src": "/api/categories/:catid",
       "dest": "/api/categories.js"
+    },
+    {
+      "src": "/api/banner",
+      "dest": "/api/banner.js"
+    },
+     {
+      "src": "/api/banner/:catid",
+      "dest": "/api/banner.js"
     }
     ]
 }
