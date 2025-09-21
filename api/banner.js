@@ -1,5 +1,5 @@
 const express = require('express');
-const banner = require('../model/banner'); // Adjust the path if necessary
+const Banner = require('../model/banner'); // Adjust the path if necessary
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -28,7 +28,7 @@ mongoose.connect("mongodb+srv://dev:devpatel1234@cluster0.pf0qwiv.mongodb.net")
 // CREATE a new banner entry
 app.post('/api/banner', async (req, res) => {
     try {
-        const banner = new banner(req.body);   // use model `banner`
+        const banner = new Banner(req.body);   // use model `banner`
         const savedbanner = await banner.save();
         res.status(201).json(savedbanner);
     } catch (error) {
@@ -41,7 +41,7 @@ app.post('/api/banner', async (req, res) => {
 app.get('/api/banner', async (req, res) => {
     try {
         
-        const banner = await banner.find();
+        const banner = await Banner.find();
         res.status(200).json(banner);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -73,7 +73,7 @@ app.put('/api/banner/:id', async (req, res) => {
 // DELETE a banner entry by ID
 app.delete("/api/banner", async (req, res) => {
   try {
-    const banner = await banner.findOneAndDelete({ catid: req.body.catid });
+    const banner = await Banner.findOneAndDelete({ catid: req.body.catid });
 
     if (!banner) {
       return res.status(404).json({ message: "banner not found" });
