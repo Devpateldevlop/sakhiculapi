@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb+srv://deva:devpatel1234@cluster0.pf0qwiv.mongodb.net/")
+mongoose.connect("mongodb+srv://deva:devpatel1234@cluster0.pf0qwiv.mongodb.net/",{
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+  keepAlive: true,
+})
 .then(() => console.log('MongoDB Connected...'))
 .catch((err) => console.log('MongoDB connection error: ' + err));
 
