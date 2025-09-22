@@ -40,7 +40,7 @@ app.post('/api/categories', async (req, res) => {
 // READ all categories entries
 app.get('/api/categories', async (req, res) => {
     try {
-        
+        await dbConnect();
         const categories = await Category.find();
         res.status(200).json(categories);
     } catch (error) {

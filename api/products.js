@@ -50,6 +50,7 @@ app.post('/api/product', async (req, res) => {
 // Or GET /api/product?categoryname=Kurti&size=M&color=Red
 app.get('/api/product', async (req, res) => {
   try {
+    await dbConnect();
     const filters = {};
 
     // add filters dynamically if provided
