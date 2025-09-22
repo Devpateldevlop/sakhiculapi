@@ -1,4 +1,5 @@
 const express = require('express');
+import dbConnect from "../lib/db";
 const Category = require('../model/categories'); // Adjust the path if necessary
 const app = express();
 const mongoose = require('mongoose');
